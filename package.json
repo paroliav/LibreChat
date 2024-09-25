@@ -8,6 +8,8 @@
     "packages/*"
   ],
   "scripts": {
+    "build": "npm run build:data-provider && cd client && npm run build",
+    "start": "node api/server/index.js",
     "update": "node config/update.js",
     "add-balance": "node config/add-balance.js",
     "list-balances": "node config/list-balances.js",
