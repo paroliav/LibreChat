@@ -9,5 +9,7 @@ services:
         value: production
       - key: JWT_SECRET
         sync: false
-      - key: CRYPT_KEY
+      - key: CREDS_KEY
+        sync: false
+      - key: CREDS_IV
         sync: false
