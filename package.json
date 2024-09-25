@@ -62,6 +62,9 @@
     "b:balance": "bun config/add-balance.js",
     "b:list-balances": "bun config/list-balances.js"
   },
+  "engines": {
+  "node": "18.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/danny-avila/LibreChat.git"
