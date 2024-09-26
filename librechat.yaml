@@ -18,32 +18,41 @@ interface:
     externalUrl: 'https://librechat.ai/tos'
     openNewTab: true
 
-# Example Registration Object Structure (optional)
+# Registration settings
 registration:
   socialLogins: ['github', 'google', 'discord', 'openid', 'facebook']
+  # Uncomment and modify the following line to restrict registration to specific email domains
+  # allowedDomains: ['gmail.com', 'yourcompany.com']
 
-# Definition of custom endpoints
+# Rate limits for various operations (optional)
+rateLimits:
+  fileUploads:
+    ipMax: 100
+    ipWindowInMinutes: 60
+    userMax: 50
+    userWindowInMinutes: 60
+  conversationsImport:
+    ipMax: 100
+    ipWindowInMinutes: 60
+    userMax: 50
+    userWindowInMinutes: 60
+
+# Endpoint configurations
 endpoints:
+  # Custom endpoints
   custom:
-    # Groq Example
+    # Groq configuration
     - name: 'groq'
       apiKey: '${GROQ_API_KEY}'
       baseURL: 'https://api.groq.com/openai/v1/'
       models:
-        default:
-          [
-            'llama3-70b-8192',
-            'llama3-8b-8192',
-            'llama2-70b-4096',
-            'mixtral-8x7b-32768',
-            'gemma-7b-it',
-          ]
+        default: ['llama3-70b-8192', 'llama3-8b-8192', 'llama2-70b-4096', 'mixtral-8x7b-32768', 'gemma-7b-it']
         fetch: false
       titleConvo: true
       titleModel: 'mixtral-8x7b-32768'
       modelDisplayLabel: 'groq'
 
-    # Mistral AI Example
+    # Mistral AI configuration
     - name: 'Mistral'
       apiKey: '${MISTRAL_API_KEY}'
       baseURL: 'https://api.mistral.ai/v1'
@@ -55,7 +64,7 @@ endpoints:
       modelDisplayLabel: 'Mistral'
       dropParams: ['stop', 'user', 'frequency_penalty', 'presence_penalty']
 
-    # OpenRouter Example
+    # OpenRouter configuration
     - name: 'OpenRouter'
       apiKey: '${OPENROUTER_KEY}'
       baseURL: 'https://openrouter.ai/api/v1'
@@ -67,24 +76,64 @@ endpoints:
       dropParams: ['stop']
       modelDisplayLabel: 'OpenRouter'
 
-    # Add OpenAI configuration
-    - name: 'openAI'
-      apiKey: '${OPENAI_API_KEY}'
-      baseURL: 'https://api.openai.com/v1'
-      models:
-        default: ['gpt-3.5-turbo', 'gpt-4']
-        fetch: true
-      titleConvo: true
-      titleModel: 'gpt-3.5-turbo'
+  # OpenAI configuration (built-in endpoint)
+  openAI:
+    apiKey: '${OPENAI_API_KEY}'
+    models:
+      default: ['gpt-3.5-turbo', 'gpt-4']
+      fetch: true
 
-    # Add Anthropic (Claude) configuration
-    - name: 'anthropic'
-      apiKey: '${ANTHROPIC_API_KEY}'
-      baseURL: 'https://api.anthropic.com'
-      models:
-        default: ['claude-2.1', 'claude-instant-1.2']
-        fetch: true
-      titleConvo: true
-      titleModel: 'claude-2.1'
+  # Anthropic (Claude) configuration (built-in endpoint)
+  anthropic:
+    apiKey: '${ANTHROPIC_API_KEY}'
+    models:
+      default: ['claude-2.1', 'claude-instant-1.2']
+      fetch: true
 
-# ... (rest of the configuration remains the same)
+  # Uncomment and configure the following section if you want to use Azure OpenAI
+  # azureOpenAI:
+  #   apiKey: '${AZURE_API_KEY}'
+  #   instanceName: '${AZURE_INSTANCE_NAME}'
+  #   deploymentName: '${AZURE_DEPLOYMENT_NAME}'
+  #   apiVersion: '2023-05-15'  # Check for the latest API version
+
+  # Uncomment and configure the following section if you want to use Google AI
+  # google:
+  #   apiKey: '${GOOGLE_API_KEY}'
+  #   models:
+  #     default: ['gemini-pro']
+  #     fetch: true
+
+# File configuration settings
+fileConfig:
+  endpoints:
+    assistants:
+      fileLimit: 5
+      fileSizeLimit: 10  # Maximum size for an individual file in MB
+      totalSizeLimit: 50  # Maximum total size for all files in a single request in MB
+      supportedMimeTypes:
+        - "image/.*"
+        - "application/pdf"
+    openAI:
+      fileLimit: 5
+      fileSizeLimit: 10
+      totalSizeLimit: 50
+    default:
+      totalSizeLimit: 20
+  serverFileSizeLimit: 100  # Global server file size limit in MB
+  avatarSizeLimit: 2  # Limit for user avatar image size in MB
+
+# Uncomment and configure the following sections if you want to use TTS (Text-to-Speech) or STT (Speech-to-Text)
+# tts:
+#   url: ''
+#   apiKey: '${TTS_API_KEY}'
+#   model: ''
+#   backend: ''
+#   voice: ''
+# 
+# stt:
+#   url: ''
+#   apiKey: '${STT_API_KEY}'
+#   model: ''
+
+# Add any additional configuration settings as needed
