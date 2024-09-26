@@ -13,7 +13,6 @@ interface:
   privacyPolicy:
     externalUrl: 'https://librechat.ai/privacy-policy'
     openNewTab: true
-
   # Terms of service
   termsOfService:
     externalUrl: 'https://librechat.ai/tos'
@@ -68,12 +67,24 @@ endpoints:
       dropParams: ['stop']
       modelDisplayLabel: 'OpenRouter'
 
-  # Add OpenAI configuration
-  openAI:
-    apiKey: '${OPENAI_API_KEY}'
+    # Add OpenAI configuration
+    - name: 'openAI'
+      apiKey: '${OPENAI_API_KEY}'
+      baseURL: 'https://api.openai.com/v1'
+      models:
+        default: ['gpt-3.5-turbo', 'gpt-4']
+        fetch: true
+      titleConvo: true
+      titleModel: 'gpt-3.5-turbo'
 
-  # Add Anthropic (Claude) configuration
-  anthropic:
-    apiKey: '${ANTHROPIC_API_KEY}'
+    # Add Anthropic (Claude) configuration
+    - name: 'anthropic'
+      apiKey: '${ANTHROPIC_API_KEY}'
+      baseURL: 'https://api.anthropic.com'
+      models:
+        default: ['claude-2.1', 'claude-instant-1.2']
+        fetch: true
+      titleConvo: true
+      titleModel: 'claude-2.1'
 
 # ... (rest of the configuration remains the same)
