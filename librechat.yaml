@@ -21,25 +21,9 @@ interface:
 # Registration settings
 registration:
   socialLogins: ['github', 'google', 'discord', 'openid', 'facebook']
-  # Uncomment and modify the following line to restrict registration to specific email domains
-  # allowedDomains: ['gmail.com', 'yourcompany.com']
-
-# Rate limits for various operations (optional)
-rateLimits:
-  fileUploads:
-    ipMax: 100
-    ipWindowInMinutes: 60
-    userMax: 50
-    userWindowInMinutes: 60
-  conversationsImport:
-    ipMax: 100
-    ipWindowInMinutes: 60
-    userMax: 50
-    userWindowInMinutes: 60
 
 # Endpoint configurations
 endpoints:
-  # Custom endpoints
   custom:
     # Groq configuration
     - name: 'groq'
@@ -76,64 +60,7 @@ endpoints:
       dropParams: ['stop']
       modelDisplayLabel: 'OpenRouter'
 
-  # OpenAI configuration (built-in endpoint)
-  openAI:
-    apiKey: '${OPENAI_API_KEY}'
-    models:
-      default: ['gpt-3.5-turbo', 'gpt-4']
-      fetch: true
-
-  # Anthropic (Claude) configuration (built-in endpoint)
-  anthropic:
-    apiKey: '${ANTHROPIC_API_KEY}'
-    models:
-      default: ['claude-2.1', 'claude-instant-1.2']
-      fetch: true
-
-  # Uncomment and configure the following section if you want to use Azure OpenAI
-  # azureOpenAI:
-  #   apiKey: '${AZURE_API_KEY}'
-  #   instanceName: '${AZURE_INSTANCE_NAME}'
-  #   deploymentName: '${AZURE_DEPLOYMENT_NAME}'
-  #   apiVersion: '2023-05-15'  # Check for the latest API version
-
-  # Uncomment and configure the following section if you want to use Google AI
-  # google:
-  #   apiKey: '${GOOGLE_API_KEY}'
-  #   models:
-  #     default: ['gemini-pro']
-  #     fetch: true
-
-# File configuration settings
+# File configuration settings (if needed)
 fileConfig:
-  endpoints:
-    assistants:
-      fileLimit: 5
-      fileSizeLimit: 10  # Maximum size for an individual file in MB
-      totalSizeLimit: 50  # Maximum total size for all files in a single request in MB
-      supportedMimeTypes:
-        - "image/.*"
-        - "application/pdf"
-    openAI:
-      fileLimit: 5
-      fileSizeLimit: 10
-      totalSizeLimit: 50
-    default:
-      totalSizeLimit: 20
   serverFileSizeLimit: 100  # Global server file size limit in MB
   avatarSizeLimit: 2  # Limit for user avatar image size in MB
-
-# Uncomment and configure the following sections if you want to use TTS (Text-to-Speech) or STT (Speech-to-Text)
-# tts:
-#   url: ''
-#   apiKey: '${TTS_API_KEY}'
-#   model: ''
-#   backend: ''
-#   voice: ''
-# 
-# stt:
-#   url: ''
-#   apiKey: '${STT_API_KEY}'
-#   model: ''
-
-# Add any additional configuration settings as needed
